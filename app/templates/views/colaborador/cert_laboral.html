@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+{% from 'helpers/_forms.html' import render_field %}
+    {% block container %}
+        <!-- recibimos las varibles desde la vista por medio del form -->
+
+        <div class="container-md">
+            <div class="col-md-12 mt-5 mb-3" style="text-align: center;">
+                <h2>Generar Certificados Laborales</h2>
+            </div>
+            <form action="" method="POST" enctype="multipart/form-data">
+                <div id="certificados" class="form-row">
+                    <div class="card form-group col-md-6">
+                        <div class="col-md-12 mt-2" style="text-align: center;">
+                            <h4>Información del Colaborador</h4>
+                        </div>
+                        <!-- Y lo utilizamos con un input oculto para el usuario -->
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                        <div class="form-grup ml-2 mr-2">
+                            
+                        </div>
+                        <div class="from-grup ml-2 mr-2">
+                            <label for="exampleInputEmail1">Cedula de Ciudadania:</label>
+                            <input type="number" name="CED" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Numero de Cedula sin Puntos" required>
+                        </div>
+                        <div class="from-grup ml-2 mr-2 mt-2">
+                            <label for="exampleInputEmail1">Dirigido a:</label>
+                            <input class="form-control" name="DIRIG" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nombre de la Persona o Empresa a Quien va Dirigido el Certificado Laboral" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3 mb-2 ml-2 mr-2" name="button" >
+                            Generar Certificado
+                        </button>
+                    </div>
+                </div>
+            </form>   
+        </div>
+                   
+{% endblock %}

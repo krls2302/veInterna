@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="static/css/dashboard.css">
+
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,700&display=swap" rel="stylesheet">
+
+    <!-- Ionic icons -->
+    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{{url_for('static', filename='images/Logo-blanco.png')}}">
+
+    <title>{{ title }}</title>
+</head>
+
+<body>
+    <div class="d-flex" id="content-wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-container" class="bg-primary">
+            <div class="logo">
+                <h4 class="text-light font-weight-bold mb-0">
+                    <a id="logo" href="{{ url_for('.index') }}"> Configuraciones V.E</a>
+                </h4>
+            </div>
+            <div class="menu">
+                <a href="{{ url_for('.index') }}" class="d-block text-light p-3 border-0"><i class="icon ion-md-apps lead mr-2"></i>
+                    Inicio</a>
+
+                <a href="{{ url_for('.registTemp') }}" class="d-block text-light p-3 border-0"><i class="icon ion-md-thermometer mr-2"></i>
+                    Registro Temperatura</a>
+                <a href="{{ url_for('.autoreporte') }}" class="d-block text-light p-3 border-0"><i class="icon ion-md-body mr-2"></i>
+                    Auto-Reporte Salud</a>
+                <a href="{{ url_for('.permiso_Salida') }}" class="d-block text-light p-3 border-0"><i class="icon ion-md-construct mr-2"></i>
+                    Permiso Salidas</a>
+                <a href="{{ url_for('.actual_datos') }}" class="d-block text-light p-3 border-0"><i class="icon ion-md-book mr-2"></i>
+                    Actualización de Datos</a>
+                <a href="#" class="d-block text-light p-3 border-0" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon ion-md-contacts mr-1"></i>
+                    Colaboradores
+                </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ url_for('.new_colaborador') }}">Nuevo Colaboradores</a>
+                        <a class="dropdown-item" href="{{ url_for('.lista_colaboradores', page_num=1) }}">Listado Colaboradores</a>
+                        <a class="dropdown-item" href="{{ url_for('page.reportes') }}">Reportes</a>
+                    </div>
+
+                <a href="{{ url_for('.registroUser') }}" class="d-block text-light p-3 border-0"><i class="icon ion-md-person-add mr-2"></i>
+                    Nuevo Usuario</a>
+                <a href="{{ url_for('.reportes') }}" class="d-block text-light p-3 border-0"><i class="icon ion-md-settings lead mr-2"></i>
+                    Dashboard</a>
+            </div>
+        </div>
+        <!-- Fin sidebar -->
+
+        <div class="w-100">
+
+         <!-- Navbar -->
+         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <div class="container">
+
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <!-- Boton de buscar listo para programar -->
+                <!-- <form class="form-inline position-relative d-inline-block my-2">
+                  <input class="form-control" type="search" placeholder="Buscar" aria-label="Buscar">
+                  <button class="btn position-absolute btn-search" type="submit"><i class="icon ion-md-search"></i></button>
+                </form> -->
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                  <li class="nav-item dropdown">
+                    <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <img src="static/images/user-1.png" class="img-fluid rounded-circle avatar mr-2"
+                      alt="Imagen de Perfil" />
+                        {{ current_user.username }}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                      <!-- <a class="dropdown-item" href="#">Mi perfil</a>
+                      <a class="dropdown-item" href="#">Suscripciones</a>
+                      <div class="dropdown-divider"></div> -->
+                      <a class="dropdown-item" href="{{ url_for('page.logout') }}">Cerrar sesión</a>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        <!-- Fin Navbar -->
+
+        <!-- Comenzamos con el contenido del configuraciones -->
+        <!-- Page Content -->
+        <div id="content" class="bg-grey w-100">
+            <section class="bg-light py-3">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-9 col-md-8">
+                            <h3 class="font-weight-bold mb-0">Configuraciones</h3>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Secciones de configuraciones primera barra -->
+            <section class="bg-mix py-3">
+                <div class="container">
+                    <h5 class="font-weight-bold mb-0">Cantidad de colaboradores y Áreas</h5>
+                    <div class="card rounded-0">
+                        <div class="card-body">
+                            <div class="row">
+                                <!-- Seccion de cantidad de colaboradores -->
+                                <div class="col-lg-6 col-md-6 d-flex stat my-3">
+                                    <div class="mx-auto">
+                                        {% for l in cant %}
+                                        <div class="form-group" style="text-align: center;">
+                                            <h4 for="message-text" class="control-label mb-0">Cantidad de Colaboradores:</h4><br>
+                                            <h4 class="control-label">{{ l.quantity }}</h4><br>
+                                            <a href="{{ url_for('.edit_cantidad', id_cant=l.id) }}" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editCant">Editar</a>
+                                            <!-- <button class="btn btn-primary m-1" type="button" data-toggle="modal" data-target="#editCant">Editar</button> -->
+                                        </div>
+                                        <!-- creamos el modal para editar la cantidad de colaboradores -->
+                                        <div class="modal fade" tabindex="-1" id="editCant" role="dialog">
+                                            <div class="modal-dialog modal-md">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4>Editar Cantidad de Colaboradores</h4>
+                                                        <button class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="container">
+                                                            <div class="col-md-12">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <form action="{{ url_for('.edit_cantidad', id_cant=l.id) }}" method="POST">
+                                                                            <!-- Y lo utilizamos con un input oculto para el usuario -->
+                                                                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                                                                            <div class="form-group">
+                                                                                <label id="str" class="control-label">Cantidad de Colaboradores:</label>
+                                                                                <input type="text" name="quantity" class="form-control" value="{{ l.quantity }}"></input>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <button type="submit" class="btn btn-info">Guardar</button>
+                                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- termina el modal para editar la cantidad de colaboradores -->
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <!-- Finaliza la seccion de cantidad de colaboradores -->
+                                <!-- Inicia la seccion de las tablas de Area -->
+                                <div class="col-lg-6 col-md-6 d-flex stat my-3">
+                                    <div class="mx-auto" id="tam-table">
+                                        <table class="table table-hover table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nombre del Área</th>
+                                                    <th>
+                                                        <button type="button" data-toggle="modal" data-target="#newArea" class="btn btn-success btn-sm">Nueva Área</button>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for a in area %}
+                                                <tr>
+                                                    <td>{{ a.area_name }}</td>
+                                                    <td>
+                                                        <a href="{{ url_for('.edit_area', id_area=a.id) }}" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editArea{{a.id}}">Editar</a>
+                                                        <a href="{{ url_for('.delete_area', id_area=a.id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Esta seguro que desea Eliminarlo?')">Eliminar</a>
+                                                    </td>
+                                                </tr>
+                                                    <!-- creamos el modal para editar Areas -->
+                                                    <div class="modal fade" tabindex="-1" id="editArea{{a.id}}" role="dialog">
+                                                        <div class="modal-dialog modal-md">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h4>Editar Cargo</h4>
+                                                                    <button class="close" data-dismiss="modal">&times;</button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="container">
+                                                                        <div class="col-md-12">
+                                                                            <div class="row">
+                                                                                <div class="col-md-12">
+                                                                                    <form action="{{ url_for('.edit_area', id_area=a.id) }}" method="POST" enctype="multipart/form-data">
+                                                                                        <!-- Y lo utilizamos con un input oculto para el usuario -->
+                                                                                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                                                                                        <div class="form-group">
+                                                                                            <label id="str" class="control-label">Nombre del Cargo:</label>
+                                                                                            <input type="text" name="area" class="form-control" value="{{ a.area_name }}"></input>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <button type="submit" class="btn btn-success btn-sm">Actualizar</button>
+                                                                                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancelar</button>
+                                                                                        </div>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- termina el modal para crear cargos -->
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- Termina la seccion de Area -->
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </section>
+
+            <!-- Nueva seccion para Cargos Tabla -->
+                <section class="bg-mix py-3">
+                    <div class="container">
+                        <h5 class="font-weight-bold mb-0">Cargo de la Compañia</h5>
+                        <div class="card rounded-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 d-flex stat my-3">
+                                        <div class="mx-auto m-1" id="tam-table">
+                                            <table class="table table-hover table-dark">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Nombre del Cargo</th>
+                                                        <th>
+                                                            <button type="button" data-toggle="modal" data-target="#newCargo" class="btn btn-success btn-sm">Nuevo Cargo</button>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for c in cargo %}
+                                                        <tr>
+                                                            <td>{{ c.charges }}</td>
+                                                            <td>
+                                                                <a href="{{ url_for('.edit_cargos', id_cargo=c.id) }}" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editCargo{{c.id}}">Editar</a>
+                                                                <a href="{{ url_for('.delete_cargo', id_cargo=c.id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Esta seguro que desea Eliminarlo?')">Eliminar</a>
+                                                            </td>
+                                                        </tr>
+                                                    <!-- creamos el modal para editar cargos -->
+                                                    <div class="modal fade" tabindex="-1" id="editCargo{{c.id}}" role="dialog">
+                                                        <div class="modal-dialog modal-md">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h4>Editar Cargo</h4>
+                                                                    <button class="close" data-dismiss="modal">&times;</button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="container">
+                                                                        <div class="col-md-12">
+                                                                            <div class="row">
+                                                                                <div class="col-md-12">
+                                                                                    <form action="{{ url_for('.edit_cargos', id_cargo=c.id) }}" method="POST" enctype="multipart/form-data">
+                                                                                        <!-- Y lo utilizamos con un input oculto para el usuario -->
+                                                                                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                                                                                        <div class="form-group">
+                                                                                            <label id="str" class="control-label">Nombre del Cargo:</label>
+                                                                                            <input type="text" name="carg" class="form-control" value="{{ c.charges }}"></input>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <button type="submit" class="btn btn-success btn-sm">Actualizar</button>
+                                                                                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancelar</button>
+                                                                                        </div>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- termina el modal para crear cargos -->
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <!-- termina las configuraciones -->
+        </div>
+    </div>
+
+    <!-- creamos el modal para crear areas -->
+    <div class="modal fade" tabindex="-1" id="newArea" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Nueva Área</h4>
+                    <button class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form action="{{ url_for('.new_area') }}" method="POST" enctype="multipart/form-data">
+                                        <!-- Y lo utilizamos con un input oculto para el usuario -->
+                                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                                        <div class="form-group">
+                                            <label id="str" class="control-label">Nombre del Área:</label>
+                                            <input type="text" name="area" class="form-control" placeholder="Descripción"></input>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-success btn-sm">Crear</button>
+                                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancelar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- termina el modal para cerrar el for -->
+
+    <!-- creamos el modal para crear cargos -->
+    <div class="modal fade" tabindex="-1" id="newCargo" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Nuevo Cargo</h4>
+                    <button class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form action="{{ url_for('.new_cargos') }}" method="POST" enctype="multipart/form-data">
+                                        <!-- Y lo utilizamos con un input oculto para el usuario -->
+                                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                                        <div class="form-group">
+                                            <label id="str" class="control-label">Nombre del Cargo:</label>
+                                            <input type="text" name="carg" class="form-control" placeholder="Descripción"></input>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-success btn-sm">Crear</button>
+                                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancelar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- termina el modal para crear cargos -->
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js" integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>
+    <!-- </footer> -->
+        <!-- sweetAlert2 -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <!-- Generamos una nueva variable de messages con sweetalert2 -->
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    {% if category == 'error' %}
+                        <script>
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'error',
+                                text: "{{message}}",
+                                showConfirmButton: true,
+                                timer: 5000
+                            })
+                        </script>
+                    {% else %}
+                        <script>
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                text: "{{message}}",
+                                showConfirmButton: true,
+                                timer: 5000
+                            })
+                        </script>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endwith  %}
+    </body>
+</html>

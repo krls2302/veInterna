@@ -1,0 +1,87 @@
+{% extends 'layout.html' %}
+    {% block container %}
+        
+              <!-- Main -->
+                <main id="main">
+                    <div id="carousel" class="carousel slide carousel-fade mt-2" data-ride="carousel" data-pause="false">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                        <img class="d-block w-100" src="{{url_for('static', filename='images/Carusel/imagen1.jpg')}}" alt="Venta Equipos">
+                        <div class="carousel-caption d-none d-md-block">
+                            <a href="https://ventaequipos.com/"><h3><strong>INFRAESTRUCTURA SOLIDA</strong></h3></a>
+                            <p>Moderniza y consolida tus análisis y procesos de negocio críticos, y <br>obtén los
+                            conocimientos que necesitas para dirigir tu estrategia empresarial.
+                            </p>
+                        </div>
+                        </div>
+                        <div class="carousel-item">
+                        <img class="d-block w-100" src="{{url_for('static', filename='images/Carusel/imagen2.jpg')}}" alt="Venta Equipos">
+                        <div class="carousel-caption d-none d-md-block">
+                            <a href="https://ventaequipos.com/"><h3><strong>SOLUCIONES DE IMPRESION</strong></h3></a>
+                            <p>Optimice tareas y procesos empresariales cruciales mediante las<br>
+                            potentes soluciones de impresión y flujos de trabajo empresariales.
+                            </p>
+                        </div>
+                        </div>
+                        <div class="carousel-item">
+                        <img class="d-block w-100" src="{{url_for('static', filename='images/Carusel/imagen3.jpg')}}" alt="Venta Equipos">
+                        <div class="carousel-caption d-none d-md-block">
+                            <a href="https://ventaequipos.com/"><h3> <strong>EQUIPOS COORPORATIVOS</strong> </h3></a>
+                            <p>Contamos con un portafolio amplio de equipos de cómputo en<br>
+                            diferentes configuraciones que se ajustan a todos sus requerimientos.
+                            </p>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </main>
+                <!-- /main -->
+
+                <!-- Complemento  -->
+                <section id="Complement">
+                <div class="container-fluid mt-2 mb-2">
+                    <div class="row">
+                    <div class="col-12 col-md-6 pl-0 pr-0">
+                        <img src="{{url_for('static', filename='images/Complemento/Centro_internacional.JPG')}}" alt="Bogota D.C"/>
+                    </div>
+                    <div class="col-12 col-md-6 pt-4 pb-4">
+                        <h2 class="mb-4">Venta Equipos S.A.S</h2>
+                        <p>
+                        Queremos contribuir en el desarrollo de nuestra sociedad,
+                        a través de la innovación en procesos tecnológicos para
+                        nuestros clientes, que permitan su desarrollo y
+                        crecimiento, para que ambos podamos transformar
+                        nuestra calidad de vida. Contamos con las mejores
+                        alianzas de fabricantes, proveedores y entidades
+                        financieras, que nos permiten generar valor tanto en
+                        productos como en servicios.
+                        </p>
+                        <a class="btn btn-outline-primary" href="https://ventaequipos.com/">Conoce más</a>
+                    </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="Complement">
+            <div class="container-fluid mt-2 mb-2">
+                <div class="row">
+                <div class="col-12 col-md-8 pt-4 pb-4">
+                    <h2 class="text-center mb-4">Partner y <strong>Distribuidor</strong></h2>
+                    <p>
+                    Nuestros productos cubren las diferentes necesidades en materia de seguridad electrónica de intrusión
+                    y de detección de incendios en diferentes locaciones y áreas.
+                    </p>
+                    <p>
+                    De la mano de nuestro aliados trabajamos para ser el mayor integrador de soluciones inteligentes de T.I. en América Latina
+                    </p>
+                    <a class="btn btn-outline-primary" href="https://ventaequipos.com/">Conoce más</a>
+                </div>
+                <div class="col-12 col-md-4 pl-0 pr-0">
+                    <img src="{{url_for('static', filename='images/Complemento/parhner.png')}}" alt="Insignias"/>
+                </div>
+                </div>
+            </div>
+            </section>
+                <!-- /complemento  -->
+
+    {% endblock %}

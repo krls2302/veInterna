@@ -1,0 +1,83 @@
+{% extends 'layout.html' %}
+{% from 'helpers/_forms.html' import render_field %}
+{% from "helpers/_forms.html" import areas %}
+{% from "helpers/_forms.html" import cargo %}
+{% from "helpers/_forms.html" import tip_doc %}
+{% from "helpers/_forms.html" import tip_cont %}
+
+    {% block container %}
+        <!-- recibimos las varibles desde la vista por medio del form -->
+
+        <div class="container">
+            <div class="col-md-12 mt-5 mb-3" style="text-align: center;">
+                <h2>Registro de Nuevos Colaboradores</h2>
+            </div>
+            <form action="" method="post" enctype="multipart/form-data">
+                <div class="card row">
+                    <div class="col-md-12 mt-2" style="text-align: center;">
+                        <h4>Datos del Colaborador</h4>
+                    </div>
+                    <div class="col-md-12">
+                        <!-- Y lo utilizamos con un input oculto para el usuario -->
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ render_field(form.full_name, class='form-control col-form-label-sm', placeholder='Nombre Completo') }}
+                            </div>
+                            <div class="form-group col-md">
+                                <label id="str">Tipo de Documento:</label>
+                                {{ tip_doc('doct', tdoc, extra='id="select_area"') }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md">
+                                {{ render_field(form.number_doc, class='form-control', type="number", placeholder='Numero de Documento Sin Puntos') }}
+                            </div>
+                            <div class="col-md">
+                                {{ render_field(form.admission_date, type="date", class='form-control', placeholder='Fecha de Ingreso') }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="form-group col-md">
+                                <label id="str">Tipo de Contrato:</label>
+                                {{ tip_cont('contrato', cont, extra='id="select_tipo"') }}
+                            </div>
+                            <div class="form-group col-md">
+                                <label id="str">Cargo:</label>
+                                {{ cargo('cargos', carg, extra='id="Selec_cargo"') }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md">
+                                {{ render_field(form.salary, class='form-control', placeholder='Ej. 1.000.000') }}
+                            </div>
+                            <div class="form-group col-md">
+                                <label id="str">Área:</label>
+                                {{ areas('area', ar, extra='id="select_area"') }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md">
+                                {{ render_field(form.email, class='form-control', placeholder='Correo Corporativo') }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="text-align: center;">
+                        <button type="submit" class="btn btn-primary mt-2 mb-2 ml-2 mr-2" name="button" >
+                            Crear Colaborador
+                        </button>
+                        <a href="javascript: history.go(-1)" class="btn btn-secondary mt-2 mb-2 ml-2 mr-2">Cancelar</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    {% endblock %}

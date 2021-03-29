@@ -1,0 +1,320 @@
+{% extends 'layout.html' %}
+{% from 'helpers/_forms.html' import render_field %}
+{% from "helpers/_forms.html" import dropdown %}
+{% from "helpers/_forms.html" import dia_semana %}
+
+    {% block container %}
+        <!-- recibimos las varibles desde la vista por medio del form -->
+    <div class="container">
+
+        <div class="container-md mt-3">
+            <div class="col-md-12" style="text-align: center;">
+                <h2>AUTO-REPORTE CONDICIONES DE SALUD</h2>
+            </div>
+            <form action="" method="post" enctype="multipart/form-data">
+                <div class="form-row">
+                    <!-- <div class="form-group col-md-12"> -->
+                        <div class="form-group col-md-12" style="text-align: center;">
+                            <h4>Información Del Colaborador</h4>
+                        </div>
+                        <!-- Y lo utilizamos con un input oculto para los servidores hacker -->
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
+                        <!-- Comienza el formulario -->
+                        <div class="form-group col-md-3">
+                            <label id="str"><strong>Nombre Completo:</strong></label>
+                            {{ dropdown('usuario', users_names, extra='id="usuarios_select"') }}
+                        </div>
+                        <div class="from-grup col-md-3">
+                            {{ render_field(form.completion_date, class='form-control', type="date", placeholder='Fecha de Diligenciamiento') }}
+                        </div>
+                        <div class="from-grup col-md-2">
+                            {{ render_field(form.eps, class='form-control', placeholder='Cual es su Eps....') }}
+                        </div>
+                        <div class="from-grup col-md-4">
+                            {{ render_field(form.pension_fund, class='form-control', placeholder='Cual es su Fondo de pensiones...') }}
+                        </div>
+                        <div class="from-grup col-md-6">
+                            {{ render_field(form.name_contact, class='form-control', placeholder='Nombre de su Contacto...') }}
+                        </div>
+                        <div class="from-grup col-md-6">
+                            {{ render_field(form.relationship, class='form-control', placeholder='Cual es el Parentesco...') }}
+                        </div>
+
+                        <div class="container p-0">
+                            <hr>
+                        </div>
+
+                        <!-- radio button for tos -->
+                        <div class="container p-1 mb-2 mt-2">
+                            <div class="custom-control p-0">
+                                <Label id="str">¿Presenta Tos Recurrente o Espontanea hoy o en los Dias previos? (2 o 3 Dias Antes):</Label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="tos1" name="TOS" value="SI" class="custom-control-input" required>
+                                <label class="custom-control-label" for="tos1">SI</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="tos2" name="TOS" value="NO" class="custom-control-input" required>
+                                <label class="custom-control-label" for="tos2">NO</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="tos3" name="TOS" value="ANTES" class="custom-control-input" required>
+                                <label class="custom-control-label" for="tos3">ANTES</label>
+                            </div>
+                        </div>
+                        <!-- radio button for escalofrios -->
+                        <div class="container p-1 mb-2">
+                            <div class="custom-control p-0">
+                                <Label id="str">¿Presenta Escalofrio Recurrente o Espontaneo hoy o en Dias Previos?:</Label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="escal1" name="ESCAL" value="SI" class="custom-control-input" required>
+                                <label class="custom-control-label" for="escal1">SI</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="escal2" name="ESCAL" value="NO" class="custom-control-input" required>
+                                <label class="custom-control-label" for="escal2">NO</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="escal3" name="ESCAL" value="ANTES" class="custom-control-input" required>
+                                <label class="custom-control-label" for="escal3">ANTES</label>
+                            </div>
+                        </div>
+
+                        <!-- radio button for dolor_garganta -->
+                        <div class="container p-1 mb-2">
+                            <div class="custom-control p-0">
+                                <Label id="str">¿Presenta Dolor de Garganta Recurrente o Espontaneo hoy o en Dias Previos? (2 o 3 Dias Antes):</Label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="dgarg1" name="DGARG" value="SI" class="custom-control-input" required>
+                                <label class="custom-control-label" for="dgarg1">SI</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="dgarg2" name="DGARG" value="NO" class="custom-control-input" required>
+                                <label class="custom-control-label" for="dgarg2">NO</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="dgarg3" name="DGARG" value="ANTES" class="custom-control-input" required>
+                                <label class="custom-control-label" for="dgarg3">ANTES</label>
+                            </div>
+                        </div>
+
+                        <!-- radio button for dolor_corporal -->
+                        <div class="container p-1 mb-2">
+                            <div class="custom-control p-0">
+                                <Label id="str">¿Presenta Dolor Corporal o Malestar General recurrente o Espontaneo hoy o en Dias Previos? (2 o 3 Dias Antes):</Label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="dcord1" name="DCORP" value="SI" class="custom-control-input" required>
+                                <label class="custom-control-label" for="dcord1">SI</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="dcord2" name="DCORP" value="NO" class="custom-control-input" required>
+                                <label class="custom-control-label" for="dcord2">NO</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="dcord3" name="DCORP" value="ANTES" class="custom-control-input" required>
+                                <label class="custom-control-label" for="dcord3">ANTES</label>
+                            </div>
+                        </div>
+
+                        <!-- radio button for dolor_cabeza -->
+                        <div class="container p-1 mb-2">
+                            <div class="custom-control p-0">
+                                <Label id="str">¿Presenta Dolor de Cabeza Recurrente o Espontaneo hoy  o en Dias Previos? (2 o 3 Dias Antes):</Label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="dcab1" name="DCAB" value="SI" class="custom-control-input" required>
+                                <label class="custom-control-label" for="dcab1">SI</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="dcab2" name="DCAB" value="NO" class="custom-control-input" required>
+                                <label class="custom-control-label" for="dcab2">NO</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="dcab3" name="DCAB" value="ANTES" class="custom-control-input" required>
+                                <label class="custom-control-label" for="dcab3">ANTES</label>
+                            </div>
+                        </div>
+
+                        <!-- radio button for fiebre -->
+                        <div class="container p-1 mb-2">
+                            <div class="custom-control p-0">
+                                <Label id="str">¿Presenta Fiebre Mayor a 37.8°C, Recurrente o Espontaneo hoy o en Dias Previos? (2 o 3 Dias Antes):</Label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="fiebr1" name="FIEBR" value="SI" class="custom-control-input" required>
+                                <label class="custom-control-label" for="fiebr1">SI</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="fiebr2" name="FIEBR" value="NO" class="custom-control-input" required>
+                                <label class="custom-control-label" for="fiebr2">NO</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="fiebr3" name="FIEBR" value="ANTES" class="custom-control-input" required>
+                                <label class="custom-control-label" for="fiebr3">ANTES</label>
+                            </div>
+                        </div>
+
+                        <!-- radio button for perdida_olfato -->
+                        <div class="container p-1 mb-2">
+                            <div class="custom-control p-0">
+                                <Label id="str">¿Presenta Perdida de Olfato, Recurrente o Espontaneo hoy o en Dias Previos? (2 o 3 Dias Antes):</Label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="olfat1" name="OLFAT" value="SI" class="custom-control-input" required>
+                                <label class="custom-control-label" for="olfat1">SI</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="olfat2" name="OLFAT" value="NO" class="custom-control-input" required>
+                                <label class="custom-control-label" for="olfat2">NO</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="olfat3" name="OLFAT" value="ANTES" class="custom-control-input" required>
+                                <label class="custom-control-label" for="olfat3">ANTES</label>
+                            </div>
+                        </div>
+
+                        <!-- radio button for dificultad_respirar -->
+                        <div class="container p-1 mb-2">
+                            <div class="custom-control p-0">
+                                <Label id="str">¿Presenta Dificultad para Respirar como si NO Entrara Aire a sus pulmones de Manera Recurrente o Espontaneo hoy o en Dias Previos? (2 o 3 Dias Antes):</Label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="dresp1" name="DRESP" value="SI" class="custom-control-input" required>
+                                <label class="custom-control-label" for="dresp1">SI</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="dresp2" name="DRESP" value="NO" class="custom-control-input" required>
+                                <label class="custom-control-label" for="dresp2">NO</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="dresp3" name="DRESP" value="ANTES" class="custom-control-input" required>
+                                <label class="custom-control-label" for="dresp3">ANTES</label>
+                            </div>
+                        </div>
+
+                        <!-- radio button for fatiga -->
+                        <div class="container p-1 mb-2">
+                            <div class="custom-control p-0">
+                                <Label id="str">¿Presenta Fatiga o Real Deterioro de mis Movimientos y mis Ganas de Hacer Algo, es Recurrente o Espontaneo hoy o en Dias Previos? (2 o 3 Dias Antes):</Label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="fatig1" name="FATIG" value="SI" class="custom-control-input" required>
+                                <label class="custom-control-label" for="fatig1">SI</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="fatig2" name="FATIG" value="NO" class="custom-control-input" required>
+                                <label class="custom-control-label" for="fatig2">NO</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="fatig3" name="FATIG" value="ANTES" class="custom-control-input" required>
+                                <label class="custom-control-label" for="fatig3">ANTES</label>
+                            </div>
+                        </div>
+
+                        <!-- radio button for viajado -->
+                        <div class="container p-1 mb-2">
+                            <div class="custom-control p-0">
+                                <Label id="str">¿Has Viajado en los ultimos 14 Dias Fuera de la Ciudad?:</Label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="viajad1" name="VIAJAD" value="SI" class="custom-control-input" required>
+                                <label class="custom-control-label" for="viajad1">SI</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="viajad2" name="VIAJAD" value="NO" class="custom-control-input" required>
+                                <label class="custom-control-label" for="viajad2">NO</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="viajad3" name="VIAJAD" value="ANTES" class="custom-control-input" required>
+                                <label class="custom-control-label" for="viajad3">ANTES</label>
+                            </div>
+                        </div>
+
+                        <!-- radio button for zona_afectadas -->
+                        <div class="container p-1 mb-2">
+                            <div class="custom-control p-0">
+                                <Label id="str">¿Has Estado en Zonas Afectadas por Covid19?:</Label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="zafect1" name="ZAFECT" value="SI" class="custom-control-input" required>
+                                <label class="custom-control-label" for="zafect1">SI</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="zafect2" name="ZAFECT" value="NO" class="custom-control-input" required>
+                                <label class="custom-control-label" for="zafect2">NO</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="zafect3" name="ZAFECT" value="ANTES" class="custom-control-input" required>
+                                <label class="custom-control-label" for="zafect3">ANTES</label>
+                            </div>
+                        </div>
+
+                        <!-- radio button for contacto_positivos -->
+                        <div class="container p-1 mb-2">
+                            <div class="custom-control p-0">
+                                <Label id="str">¿Has Estado en Contacto con Pacientes positivos Covid19?:</Label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="cposit1" name="CPOSIT" value="SI" class="custom-control-input" required>
+                                <label class="custom-control-label" for="cposit1">SI</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="cposit2" name="CPOSIT" value="NO" class="custom-control-input" required>
+                                <label class="custom-control-label" for="cposit2">NO</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="cposit3" name="CPOSIT" value="ANTES" class="custom-control-input" required>
+                                <label class="custom-control-label" for="cposit3">ANTES</label>
+                            </div>
+                        </div>
+
+                        <!-- radio button for contactos_sospechosos -->
+                        <div class="container p-1 mb-2">
+                            <div class="custom-control p-0">
+                                <Label id="str">¿Has Estado en Contacto con Pacientes Sospechoso Covid19?:</Label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="csospec1" name="CSOSPEC" value="SI" class="custom-control-input" required>
+                                <label class="custom-control-label" for="csospec1">SI</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="csospec2" name="CSOSPEC" value="NO" class="custom-control-input" required>
+                                <label class="custom-control-label" for="csospec2">NO</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="csospec3" name="CSOSPEC" value="ANTES" class="custom-control-input" required>
+                                <label class="custom-control-label" for="csospec3">ANTES</label>
+                            </div>
+                        </div>
+
+                        <div class="container p-0">
+                            <hr>
+                        </div>
+
+                        <div class="from-grup col-md-12">
+                            {{ render_field(form.observations, class='form-control', placeholder='Tiene alguna Observación de Salud haznos Saber...') }}
+                        </div>
+                        <div class="from-grup col-md-12">
+                            <p>Declaro que la información dada sobre mi condición de salud consignada en este documento es veraz.
+                            En consecuencia, cualquier omisión o falsedad que se comprobare en cualquier momento,
+                            será considerada como un riesgo para el manejo de nuestra salud y acepto las consecuencias
+                            jurídicas que se deriven de dicha omisión.</p>
+                        </div>
+                        <div class="from-grup col-md-12">
+                            <p>Finalmente, declaro conocer las recomendaciones y medidas de prevención adoptadas
+                            por la VENTA EQUIPOS S.A.S, para prevenir la propagación del COVID-19 en el
+                            centro de trabajo y que estoy obligado a cumplir con las indicaciones que
+                            imparta la compañía y/o el personal médico de mi EPS.</p>
+                        </div>
+                </div>
+                    <button type="submit" class="btn btn-primary mt-5" name="button" >
+                        Registrar Auto-Reporte
+            </form>
+        </div>
+    </div>
+
+    {% endblock %}

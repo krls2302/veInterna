@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<style type="text/css">
+    body{
+    font-family: 'Calibri', 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+    }
+
+    .item{
+        float: left;
+    }
+    .container{
+        overflow: hidden;
+        width: 100%;
+    }
+    #logo{
+        width: 200px;
+        margin-top: 5%;
+    }
+    #fecha{
+        margin-top:100px;
+        font-size: 18px;
+        font-style: italic;
+    }
+
+    #senores{
+        margin-top: 100px;
+        font-style: italic;
+    }
+
+    #senor{
+        margin: 0px;
+        font-style: italic;
+    }
+    #ref{
+        text-align: end;
+        margin-top: 50px;
+        font-style: italic;
+    }
+    #apreciado{
+        font-style: italic;
+    }
+    #parafo{
+        margin-top: 50px;
+        text-align: justify;
+        font-style: italic;
+    }
+    #expide{
+        margin-top: 60px;
+        font-style: italic;
+    }
+    #atento{
+        margin-top: 50px;
+        margin-bottom: 0px;
+        font-style: italic;
+    }
+    #div-firma{
+        margin-top: 10px;
+        margin-bottom: 110px;
+        font-style: italic;
+    }
+    #firma{
+        margin: 0px;
+        width: 320px;
+        size: 6mm;
+    }
+    #infor{
+        font-size: 12px;
+        text-align: center;
+        font-style: italic;
+        margin-bottom: 30px;
+    }
+    #separador{
+        margin: 0%;
+    }
+    #piedepagina{
+        color: blue;
+        font-size: 12px;
+    }
+    #primer{
+        width: 20%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #segundo{
+        width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+    #tercero{
+        width: 20%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: end;
+    }
+    #formato-final{
+        text-align: end;
+    }
+</style>
+<body>
+    <div>
+        <img id="logo" src="{{ img }}" alt="Logo Principal">
+        <hr>
+        <div>
+            <p id="fecha">Bogotá, {{ fecha }} </p>
+
+        </div>
+
+        <div id="senores">
+            <P id="senor">Sr./Sres.</P>
+            <P id="senor"><Strong>{{ sr }}</Strong></P>
+            <P id="senor">Bogotá</P>
+        </div>
+        <div id="ref">
+            <p>Ref.:  Certificación Laboral</p>
+        </div>
+        <div id="apreciado">
+            Apreciados señores:
+        </div>
+
+        <div>
+            <p id="parafo">
+                Certificamos que el señor/a <strong>{{ colab.full_name }} </strong>
+                identificado con {{ colab.type_doc }} No. {{ colab.number_doc }},
+                labora en nuestra Compañía <strong>VENTA EQUIPOS S.A.S</strong> con
+                NIT 900.155.085-6 desde el pasado {{ ingr }},
+                 con un contrato a {{ colab.type_contract }}, desempeñando el
+                cargo de {{ colab.cargo }} con una asignación mensual
+                de <strong>${{ colab.salary }} PESOS M/CTE</strong>.
+            </p>
+        </div>
+
+        <div>
+            <p id="expide">
+                La presente certificación se expide a solicitud del interesado con destino
+                al Sr./Sres. <strong>{{ sr }}</strong>, a los {{ dia }} ({{ ndia }}) días del mes de {{ mes }} de {{ year }}.
+            </p>
+        </div>
+
+        <div id="atento">
+            <p>Atentamente,</p>
+        </div>
+
+        <div id="div-firma">
+            <img id="logo" src="{{ firma }}" alt="Firma">
+            <hr id="firma" color="black">
+            <P id="senor"><strong>Jeimmy Janneth Rocha Portes</strong></P>
+            <P id="senor"><strong>Gerente Administrativa y Financiera</strong></P>
+        </div>
+
+        <div id="infor">
+            <p>
+                Este certificado es generado de forma automática, para confirmar
+                la validez y autenticidad de este certificado, se podrá comunicar con
+                VENTA EQUIPOS S.A.S., al PBX (1) 3000652 Ext. 115, 133
+            </p>
+        </div>
+
+    <hr id="separador">
+    <div id="piedepagina" class="container">
+        <div>
+            <div id="primer" class="item">
+               <p>
+                    <strong>Fecha Formato<br>04/02/2019</strong>
+               </p>
+            </div>
+            <div id="segundo" class="item">
+                <p>
+                    <strong>Calle 96 No 46-19 Télefono 3 00 06 52 / 3 00 06 53 - Bogotá Colombia<br>
+                    <u>www.ventaequipos.com</u></strong>
+                </p>
+            </div>
+            <div id="tercero" class="item">
+                <p><strong>Formato-Rev <br> 03.02.01.012-02</strong></p>
+            </div>
+        </div>
+    </div>
+
+    </div>
+</body>
+</html>

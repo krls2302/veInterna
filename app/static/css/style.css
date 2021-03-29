@@ -1,0 +1,151 @@
+:root {
+    --primary: #111B54;
+    --light: #ffffff;
+    --grey: #efefef;
+}
+
+body {
+    /* overflow: hidden; */
+    font-family: 'Muli', sans-serif;
+    font-weight: 300;
+    color: var(--primary);
+}
+
+/* main */
+#main .carousel-inner img {
+    max-height: 50vh;
+    object-fit: cove;
+    filter: grayscale(20%);
+  }
+
+  #carousel {
+    position: relative;
+  }
+
+  #carousel .carousel-caption{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #2B12C8;
+  }
+
+  #carousel .carousel-caption h3{
+    font-style: oblique;
+    text-align: right;
+    margin-right: 13%;
+    margin-top: 14%;
+
+  }
+
+  #carousel .carousel-caption p{
+    font-style: oblique;
+    text-align: right;
+    margin-right: 13%;
+    color: white !important;
+    font-size: 18px;
+
+  }
+
+  #carousel .overlay .container,
+  #carousel .overlay .row {
+    height: 100%;
+  }
+  /* /main */
+
+/* complemento  */
+
+#Complement img{
+    max-width: 100%;
+  }
+
+  #Complement h2{
+    color: #096BE5;
+    font-style: italic;
+    font-size: 40px;
+  }
+
+  /* /complemento */
+
+/* nuevos cambios en registros */
+#str{
+  font-weight: bold !important;
+}
+
+
+/* pagina de actualizacion de datos */
+#subtitulos{
+  font-size: 16px;
+}
+
+/* Ingresos de texto para el cuadro de info de ingreso a la empresa */
+#ingresos{
+  align-items: baseline;
+}
+
+.spect{
+  margin-right: 60px !important;
+}
+
+.spect1{
+  margin-right: 38px !important;
+}
+
+#bachiller{
+  margin-left: 6px;
+}
+
+#tecnico{
+  margin-left: 38px;
+}
+
+#tecnologo{
+  margin-left: 6px;
+}
+
+#postgrado{
+  margin-left: 20px;
+}
+
+#otros{
+  margin-left: 60px;
+}
+
+#ingresos, td, label{
+  margin-bottom: 0px !important;
+}
+
+/* Primer fecha del encabezado */
+#fecha{
+  text-align: -moz-right;
+  text-align: -webkit-right !important;
+}
+
+/* tabla de actualizacion de datos */
+#tables{
+  width: 100%;
+}
+#num{
+  width: 4%;
+}
+#nombre{
+  width: 55%;
+}
+#parent{
+  width: 10%;
+}
+#FecN{
+  width: 10%;
+}
+#eda{
+  width: 6%;
+}
+#neduc{
+  width: 15%;
+}
+/* Certificados */
+#certificados{
+  justify-content: center !important;
+}

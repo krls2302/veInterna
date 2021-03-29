@@ -1,0 +1,116 @@
+{% extends 'layout.html' %}
+{% from 'helpers/_forms.html' import render_field %}
+{% from "helpers/_forms.html" import dropdown %}
+{% from "helpers/_forms.html" import dia_semana %}
+
+    {% block container %}
+        <!-- recibimos las varibles desde la vista por medio del form -->
+    <div class="container">
+
+        <div class="container-md">
+            <div class="col-md-12 mt-3" style="text-align: center;">
+                <h2>REGISTRO DE TEMPERATURA</h2>
+            </div>
+            <form action="" method="post" enctype="multipart/form-data">
+                <div class="form-row">
+                    <!-- <div class="form-group col-md-12"> -->
+                        <div class="form-group col-md-12" style="text-align: center;">
+                            <h4>Información Diaria</h4>
+                        </div>
+                        <!-- Y lo utilizamos con un input oculto para el usuario -->
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
+                        <div class="form-group col-md-4">
+                            <label id="str">Nombre Completo:</label>
+                            {{ dropdown('usuario', users_names, extra='id="usuarios_select"') }}
+                        </div>
+                        <div class="from-grup col-md-1">
+                            {{ render_field(form.ages, class='form-control', type='number', placeholder='Edad') }}
+                        </div>
+                        <div class="from-grup col-md-3">
+                            {{ render_field(form.completion_date, class='form-control', type="date", placeholder="Formato (AAAA-MM-DD)") }}
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label id="str">Dia de la Semana:</label>
+                            {{ dia_semana('usuario', dia, extra='id="usuarios_select"') }}
+                        </div>
+                        <div class="col-md-12">
+                            <label><strong>
+                                Lavado de Manos:</strong>
+                            </label>
+                        </div>
+                        <div class="form-group form-check-inline col-md-12">
+                            <div class="custom-control custom-checkbox col-md-3">
+                                <label>Horas Lavado de Manos:</label>
+                            </div>
+                            <div class="custom-control custom-checkbox col-md-3">
+                                <input name="lav1" value="11:00 AM" type="checkbox" class="custom-control-input" id="customCheck1">
+                                <label class="custom-control-label" for="customCheck1">11:00 AM</label>
+                            </div>
+                            <div class="custom-control custom-checkbox col-md-3">
+                                <input name="lav2" value="2:00 PM" type="checkbox" class="custom-control-input" id="customCheck2">
+                                <label class="custom-control-label" for="customCheck2">2:00 PM</label>
+                            </div>
+                            <div class="custom-control custom-checkbox col-md-3">
+                                <input name="lav3" value="5:00 PM" type="checkbox" class="custom-control-input" id="customCheck3">
+                                <label class="custom-control-label" for="customCheck3">5:00 PM</label>
+                            </div>
+                        </div>
+                        <div class="from-grup col-md-3">
+                            {{ render_field(form.time_entry, class='form-control', type='time') }}
+                        </div>
+                        <div class="from-grup col-md-3">
+                            {{ render_field(form.entry_temperature, class='form-control', type='number', step="0.01", placeholder='Valor ej. 35.6') }}
+                        </div>
+                        <div class="from-grup col-md-3">
+                            {{ render_field(form.departure_time, class='form-control', type='time', placeholder='Ejemplo: 18:00') }}
+                        </div>
+                        <div class="from-grup col-md-3">
+                            {{ render_field(form.outlet_temperature, class='form-control', type='number', step="0.01", placeholder='Valor ej. 36.5') }}
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <label><strong>
+                                Pausas Activas:</strong>
+                            </label>
+                        </div>
+                        <div class="form-group form-check-inline col-md-12">
+                            <div class="custom-control custom-checkbox col-md-5">
+                                <label>Cuántas Pausas Activas Realizaste el Dia de Hoy?</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline mr-5">
+                                <input type="radio" id="pas1" name="PAUSAS" value="Ninguna Vez" class="custom-control-input" required>
+                                <label class="custom-control-label" for="pas1">Ninguna Vez</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline mr-5">
+                                <input type="radio" id="pas2" name="PAUSAS" value="De 1 - 3 Veces" class="custom-control-input" required>
+                                <label class="custom-control-label" for="pas2">De 1 - 3 Veces</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="pas3" name="PAUSAS" value="ANTES" class="custom-control-input" required>
+                                <label class="custom-control-label" for="pas3">4 o más Veces</label>
+                            </div>
+                        </div>
+                        <div class="from-grup col-md-12">
+                            {{ render_field(form.observations, class='form-control', placeholder='Tiene alguna Observación de Salud haznos Saber...') }}
+                        </div>
+                        <div class="from-grup col-md-12">
+                            <p>Declaro que la información dada sobre mi condición de salud consignada en este documento es veraz.
+                            En consecuencia, cualquier omisión o falsedad que se comprobare en cualquier momento,
+                            será considerada como un riesgo para el manejo de nuestra salud y acepto las consecuencias
+                            jurídicas que se deriven de dicha omisión.</p>
+                        </div>
+                        <div class="from-grup col-md-12">
+                            <p>Finalmente, declaro conocer las recomendaciones y medidas de prevención adoptadas
+                            por la VENTA EQUIPOS S.A.S, para prevenir la propagación del COVID-19 en el
+                            centro de trabajo y que estoy obligado a cumplir con las indicaciones que
+                            imparta la compañía y/o el personal médico de mi EPS.</p>
+                        </div>
+                </div>
+                    <button type="submit" class="btn btn-primary mt-5" name="button" >
+                        Registrar Temperatura
+                    </button>
+            </form>
+        </div>
+    </div>
+
+    {% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+    {% from 'helpers/_forms.html' import render_field %}
+    {% block container %}
+
+    <!-- recibimos el parametro como varible que despues descomprimimos y mostramos -->
+    <div class="container">
+        <div class="row mt-5 justify-content-md-center">
+            <div class="col-md"></div>
+            <div class="card col-md mt-3 mb-3 p-3">
+                <h2>Inicio de Sesión</h2>
+                <form action="" method="post">
+
+                    <!-- Y lo utilizamos con un input oculto para el usuario -->
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
+                    <div class="form-grup">
+                        {{ render_field(form.username, class= 'form-control col-form-label-sm', placeholder='Nombre de Usuario') }}
+                    </div>
+                    <div class="from-grup">
+                        {{ render_field(form.password, class= 'form-control col-form-label-sm', placeholder='Contraseña o password') }}
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm btn-lg btn-block mt-3" name="button" >
+                        Ingresar
+                    </button>
+                </form>
+            </div>
+            <div class="col-md"></div>
+        </div>
+    </div>
+
+
+    {% endblock %}

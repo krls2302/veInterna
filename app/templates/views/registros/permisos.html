@@ -1,0 +1,99 @@
+{% extends 'layout.html' %}
+{% from 'helpers/_forms.html' import render_field %}
+{% from "helpers/_forms.html" import dropdown %}
+{% from "helpers/_forms.html" import dia_semana %}
+
+    {% block container %}
+        <!-- recibimos las varibles desde la vista por medio del form -->
+    <div class="container">
+
+        <div class="container-md m-4">
+            <div class="col-md-12" style="text-align: center;">
+                <h2>SOLICITUD DE PERMISO <br> Y/O <br> REGISTRO DE SALIDAS</h2>
+            </div>
+            <form action="" method="post" enctype="multipart/form-data">
+                <div class="form-row mt-5">
+                    <!-- <div class="form-group col-md-12"> -->
+
+                        <!-- Y lo utilizamos con un input oculto para los servidores hacker -->
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
+                        <!-- Comienza el formulario -->
+                        <div class="from-grup col-md-6">
+                            {{ render_field(form.email, class='form-control', required=True, placeholder='Dirección de correo electrónico...') }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label id="str"><strong>Nombres y Apellidos Completos:</strong></label>
+                            {{ dropdown('usuario', users_names, extra='id="usuarios_select"') }}
+                        </div>
+                        <div class="from-grup col-md-3">
+                            {{ render_field(form.date_completion, class='form-control', type="date", placeholder='Fecha de Diligenciamiento') }}
+                        </div>
+
+                        <div class="from-grup col-md-3">
+                            {{ render_field(form.departure_date, class='form-control', type="date", placeholder='Fecha de la salida o permiso...') }}
+                        </div>
+                        <div class="from-grup col-md-3">
+                            {{ render_field(form.departure_time, class='form-control', type="time", placeholder='Hora estimada de salida...') }}
+                        </div>
+                        <div class="from-grup col-md-3">
+                            {{ render_field(form.check_in, class='form-control', type="time", placeholder='Hora estimada de llegada...') }}
+                        </div>
+
+                        <div class="container p-0">
+                            <hr>
+                        </div>
+
+                        <!-- radio button for tos -->
+                        <div class="container p-1 mb-2 mt-2 col-md-5">
+                            <div class="custom-control p-0">
+                                <Label id="str">Motivo de la Salida:</Label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="msalida1" name="MSALIDA" value="Laboral" class="custom-control-input" required>
+                                <label class="custom-control-label" for="msalida1">Laboral</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="msalida2" name="MSALIDA" value="Personal" class="custom-control-input" required>
+                                <label class="custom-control-label" for="msalida2">Personal</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="msalida3" name="MSALIDA" value="Cita medica" class="custom-control-input" required>
+                                <label class="custom-control-label" for="msalida3">Cita medica</label>
+                            </div>
+                        </div>
+                        <!-- radio button for escalofrios -->
+                        <div class="from-grup col-md-7">
+                            {{ render_field(form.place_displacement, class='form-control', placeholder='Nombre del Proveedor o Cliente...') }}
+                        </div>
+                        <div class="container p-1 mb-2 col-md-5">
+                            <div class="custom-control p-0">
+                                <Label id="str">¿Cuenta con autorización previa de su jefe inmediato?:</Label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="pji1" name="PJI" value="SI" class="custom-control-input" required>
+                                <label class="custom-control-label" for="pji1">SI</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="pji2" name="PJI" value="NO" class="custom-control-input" required>
+                                <label class="custom-control-label" for="pji2">NO</label>
+                            </div>
+                        </div>
+                        <div class="from-grup col-md-7">
+                            {{ render_field(form.who_authorized, class='form-control', placeholder='Nombre completo de sus jefe inmediato o quien autoriza...') }}
+                        </div>
+
+                        <div class="container p-0">
+                            <hr>
+                        </div>
+                        <div class="from-grup col-md-12">
+                            {{ render_field(form.observations, class='form-control', placeholder='Alguna Observación...') }}
+                        </div>
+                </div>
+                    <button type="submit" class="btn btn-primary mt-4" name="button" >
+                        Enviar Permiso
+            </form>
+        </div>
+    </div>
+
+    {% endblock %}

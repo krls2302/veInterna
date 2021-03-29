@@ -1,0 +1,600 @@
+{% extends 'layout.html' %}
+{% from 'helpers/_forms.html' import render_field %}
+{% from "helpers/_forms.html" import dropdown %}
+{% from "helpers/_forms.html" import dia_semana %}
+{% from "helpers/_forms.html" import areas %}
+{% from "helpers/_forms.html" import cargo %}
+
+    {% block container %}
+        <!-- recibimos las varibles desde la vista por medio del form -->
+    <div class="container">
+
+        <div class="container-md">
+            <div class="col-md-12 mt-5" style="text-align: center;">
+                <h4>ACTUALIZACIÓN DE DATOS DE EMPLEADOS <br> VENTA EQUIPOS S.A.S</h4>
+            </div>
+            <form action="" method="post" enctype="multipart/form-data">
+                <div class="form-row">
+                    <!-- <div class="form-group col-md-12"> -->
+                        <div id="fecha" class="from-grup col-md-12">
+                            <div class="from-grup col-md-3">
+                                {{ render_field(form.date_completion, class='form-control', type="date", placeholder='Formato (AAAA-MM-DD)') }}
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12 mt-4">
+                            <h1 id="subtitulos"><u>DATOS GENERALES DEL EMPLEADO</u></h1>
+                        </div>
+                        <!-- Y lo utilizamos con un input oculto para el usuario -->
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
+                        <div class="container row pr-0">
+                            <div class="form-group col-md-4">
+                                <label id="str">Nombre Completo:</label>
+                                {{ dropdown('usuario', users_names, extra='id="usuarios_select"') }}
+                            </div>
+                            <div class="from-grup col-md-1">
+                                {{ render_field(form.stratum, class='form-control', type="number", placeholder='N° Estrato...') }}
+                            </div>
+                            <div class="from-grup col-md-3">
+                                {{ render_field(form.home_address, class='form-control', placeholder='Dirección Completa...') }}
+                            </div>
+                            <div class="from-grup col-md-2">
+                                {{ render_field(form.neighborhood, class='form-control', placeholder='Nombre de su Barrio...') }}
+                            </div>
+                            <div class="from-grup col-md-2">
+                                {{ render_field(form.location, class='form-control', placeholder='Localidad Pertenece...') }}
+                            </div>
+                        </div>
+
+                        <div class="container row mb-2 pr-0">
+                            <div class="container col-md">
+                                <div class="custom-control p-0">
+                                    <Label id="str">Vivienda Propia:</Label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="vvp1" name="VVP" value="SI" class="custom-control-input" required>
+                                    <label class="custom-control-label" for="vvp1">SI</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="vvp2" name="VVP" value="NO" class="custom-control-input" required>
+                                    <label class="custom-control-label" for="vvp2">NO</label>
+                                </div>
+                            </div>
+                            <div class="from-grup col-md">
+                                {{ render_field(form.phone, class='form-control', placeholder='N° de Telefono...') }}
+                            </div>
+                            <div class="from-grup col-md">
+                                {{ render_field(form.cellular, class='form-control', placeholder='N° de Celular...') }}
+                            </div>
+                            <div class="from-grup col-md">
+                                {{ render_field(form.city, class='form-control', placeholder='Nombre Ciudad...') }}
+                            </div>
+                        </div>
+
+                        <div class="container row mb-2 pr-0">
+                            <div class="container m-0 col-md">
+                                <div class="custom-control p-0">
+                                    <Label id="str">Licencia de Conducción:</Label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="lic1" name="LIC" value="SI" class="custom-control-input" required>
+                                    <label class="custom-control-label" for="lic1">SI</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="lic2" name="LIC" value="NO" class="custom-control-input" required>
+                                    <label class="custom-control-label" for="lic2">NO</label>
+                                </div>
+                            </div>
+                            <div class="from-grup col-md">
+                                {{ render_field(form.motorcycle, class='form-control', placeholder='N° de Licencia..') }}
+                            </div>
+                            <div class="from-grup col-md">
+                                {{ render_field(form.car, class='form-control', placeholder='N° de Licencia..') }}
+                            </div>
+                            <div class="from-grup col-md">
+                                {{ render_field(form.category, class='form-control', placeholder='Categoria...') }}
+                            </div>
+                            <div class="container m-0 col-md">
+                                <div class="custom-control p-0">
+                                    <Label id="str">Vehículo propio:</Label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="vhp1" name="VHP" value="SI" class="custom-control-input" required>
+                                    <label class="custom-control-label" for="vhp1">SI</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="vhp2" name="VHP" value="NO" class="custom-control-input" required>
+                                    <label class="custom-control-label" for="vhp2">NO</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container row mb-2 pr-0">
+                            <div class="container m-0 col-md-3">
+                                <div class="custom-control p-0">
+                                    <Label id="str">Doc. Identidad:</Label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="tyd1" name="TYD" value="TI" class="custom-control-input" required>
+                                    <label class="custom-control-label" for="tyd1">TI</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="tyd2" name="TYD" value="CC" class="custom-control-input" required>
+                                    <label class="custom-control-label" for="tyd2">CC</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="tyd3" name="TYD" value="CE" class="custom-control-input" required>
+                                    <label class="custom-control-label" for="tyd3">CE</label>
+                                </div>
+                            </div>
+                            <div class="from-grup col-md">
+                                {{ render_field(form.identity_document, class='form-control', placeholder='N° de Documento...') }}
+                            </div>
+                            <div class="from-grup col-md">
+                                {{ render_field(form.expedition_place, class='form-control', placeholder='Lugar de Expedición...') }}
+                            </div>
+                            <div class="from-grup col-md">
+                                {{ render_field(form.expedition_date, type="date", class='form-control', placeholder='Fecha de Expedición...') }}
+                            </div>
+                            <div class="from-grup col-md">
+                                {{ render_field(form.military_card, class='form-control', placeholder='N° de Libreta..') }}
+                            </div>
+                            <div class="from-grup col-md-1">
+                                {{ render_field(form.district, class='form-control', placeholder='N°.') }}
+                            </div>
+                        </div>
+
+                        <div class="container row mb-2 pr-0">
+                            <div class="from-grup col-md">
+                                {{ render_field(form.birthdate, class='form-control', type="date", placeholder='Fecha de Nacimiento') }}
+                            </div>
+                            <div class="from-grup col-md">
+                                {{ render_field(form.place_birth, class='form-control', placeholder='Lugar de Nacimiento...') }}
+                            </div>
+                            <div class="container m-0 col-md">
+                                <div class="custom-control p-0">
+                                    <Label id="str">SEXO:</Label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="sexo1" name="SEXO" value="M" class="custom-control-input" required>
+                                    <label class="custom-control-label" for="sexo1">M</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="sexo2" name="SEXO" value="F" class="custom-control-input" required>
+                                    <label class="custom-control-label" for="sexo2">F</label>
+                                </div>
+                            </div>
+                            <div class="from-grup col-md">
+                                {{ render_field(form.nationality, class='form-control', placeholder='Nacionalidad...') }}
+                            </div>
+                            <div class="from-grup col-md">
+                                {{ render_field(form.rh, class='form-control', placeholder='R.H.') }}
+                            </div>
+                        </div>
+
+                        <div class="container row mb-2 pr-0">
+                            <div class="form-group col-md-5">
+                                <label id="str">Cargo:</label>
+                                {{ cargo('cargo', selec_cargo, extra='id="select_cargo"') }}
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label id="str">Área:</label>
+                                {{ areas('area', selarea, extra='id="select_area"') }}
+                            </div>
+                            <div class="from-grup col-md">
+                                {{ render_field(form.personal_mail, class='form-control', placeholder='Correo Personal...') }}
+                            </div>
+                        </div>
+
+                        <div class="container m-0 p-0 row mb-2">
+                            <div class="col-md-6 row mr-0">
+                                <div class="from-grup col-md-6">
+                                    {{ render_field(form.date_admission, class='form-control', type="date", placeholder='Fecha de Ingreso...') }}
+                                </div>
+                                <div class="from-grup col-md-6">
+                                    {{ render_field(form.compensation_box, class='form-control', placeholder='Caja de Compensación Familiar...') }}
+                                </div>
+                                <div id="ingresos" class="from-grup col-md">
+                                    {{ render_field(form.entity, class='form-control', placeholder='Entidad Bancaria...') }}
+                                </div>
+                                <div class="container m-0 col-md">
+                                    <div class="custom-control p-0">
+                                        <Label class="mr-3" id="str">Tipo Cuenta:</Label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="cuenta1" name="CUENTA" value="Ahorros" class="custom-control-input" required>
+                                        <label class="custom-control-label" for="cuenta1">Ahorros</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="cuenta2" name="CUENTA" value="Corriente" class="custom-control-input" required>
+                                        <label class="custom-control-label" for="cuenta2">Corriente</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="from-grup row pr-0 col-md-6">
+                                <div class="from-grup col-md-6">
+                                    {{ render_field(form.eps, class='form-control', placeholder='Cual es su Eps...') }}
+                                </div>
+                                <div class="from-grup col-md-6 pr-0">
+                                    {{ render_field(form.pension_fund, class='form-control', placeholder='Fondo de Pensiones...') }}
+                                </div>
+                                <div class="from-grup col-md-6 ">
+                                    {{ render_field(form.Layoffs, class='form-control', placeholder='Cesantías...') }}
+                                </div>
+                                <div class="from-grup col-md-6 pr-0">
+                                    {{ render_field(form.arl, class='form-control', placeholder='Cual es su ARL...') }}
+                                </div>
+                                <div class="from-grup col-md pr-0">
+                                    {{ render_field(form.account_number, class='form-control', placeholder='N° de Cuenta...') }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container row">
+                            <div class="container m-0 pr-0 col-md-12">
+                                <div class="custom-control p-0">
+                                    <Label class="mr-3" id="str">Estado Civil:</Label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="estado1" name="STCIVIL" value="Soltero(a)" class="custom-control-input" required>
+                                    <label class="custom-control-label" for="estado1">Soltero(a)</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="estado2" name="STCIVIL" value="Casado(a)" class="custom-control-input" required>
+                                    <label class="custom-control-label" for="estado2">Casado(a)</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="estado3" name="STCIVIL" value="Union Libre" class="custom-control-input" required>
+                                    <label class="custom-control-label" for="estado3">Union Libre</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="estado4" name="STCIVIL" value="Separado(a)" class="custom-control-input" required>
+                                    <label class="custom-control-label" for="estado4">Separado(a)</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="estado5" name="STCIVIL" value="Viudo(a)" class="custom-control-input" required>
+                                    <label class="custom-control-label" for="estado5">Viudo(a)</label>
+                                </div>
+                            </div>
+
+                            <div class="from-grup col-md mt-2">
+                                {{ render_field(form.full_name_spouse, class='form-control', placeholder='Nombre Completo del Cónyuge...') }}
+                            </div>
+                            <div class="from-grup col-md-2 mt-2 pr-0">
+                                {{ render_field(form.number_children, class='form-control', placeholder='N° de Hijos') }}
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12 mt-4">
+                            <h1 id="subtitulos"><u>EN CASO DE EMERGENCIA AVISAR A</u></h1>
+                        </div>
+
+                        <div class="container row pr-0 mr-0">
+                            <div class="from-grup col-md-7">
+                                {{ render_field(form.emer_fullname, class='form-control', placeholder='Nombre Completo...') }}
+                                {{ render_field(form.emer_parentesco, class='form-control', placeholder='Parentesco...') }}
+                                {{ render_field(form.emer_direction, class='form-control', placeholder='Dirección Completa...') }}
+                            </div>
+                            <div class="from-grup col-md-5">
+                                {{ render_field(form.emer_city, class='form-control', placeholder='Ciudad...') }}
+                                {{ render_field(form.emer_cellular, class='form-control', placeholder='N° de Celular...') }}
+                                {{ render_field(form.emer_phone, class='form-control', placeholder='N° de Teléfono...') }}
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12 mt-4">
+                            <h1 id="subtitulos"><u>DATOS CLINICOS</u></h1>
+                        </div>
+
+                        <div class="container">
+                            <fieldset class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <Label class="spect mb-0" id="str">Consume Medicamentos:</Label>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="conmed1" name="CONMED" value="SI" class="custom-control-input" required>
+                                            <label class="custom-control-label" for="conmed1">SI</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="conmed2" name="CONMED" value="NO" class="custom-control-input" required>
+                                            <label class="custom-control-label" for="conmed2">NO</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-7 mb-0">
+                                        <div id="ingresos" class="custom-control custom-radio">
+                                            {{ render_field(form.Which_medications, class='form-control', placeholder='Nombre del Medicamento...') }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <Label class="spect mb-0" id="str">Es alérgico a un medicamento:</Label>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="alertg1" name="ALERG" value="SI" class="custom-control-input" required>
+                                            <label class="custom-control-label" for="alertg1">SI</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="alertg2" name="ALERG" value="NO" class="custom-control-input" required>
+                                            <label class="custom-control-label" for="alertg2">NO</label>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group col-md-7 mb-0">
+                                        <div id="ingresos" class="custom-control custom-radio">
+                                            {{ render_field(form.which_allergy, class='form-control', placeholder='Nombre del Medicamento...') }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-5 mb-0">
+                                        <Label class="spect" id="str">Enfermedades importantes:</Label>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="enfimp1" name="ENFIMP" value="SI" class="custom-control-input" required>
+                                            <label class="custom-control-label" for="enfimp1">SI</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="enfimp2" name="ENFIMP" value="NO" class="custom-control-input" required>
+                                            <label class="custom-control-label" for="enfimp2">NO</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-7 mb-0">
+                                        <div id="ingresos" class="custom-control custom-radio">
+                                            {{ render_field(form.which_diseases, class='form-control', placeholder='Nombre de la Enfermedad...') }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <div class="form-group col-md-12 mt-4">
+                            <h1 id="subtitulos"><u>ESTUDIOS REALIZADOS</u></h1>
+                        </div>
+                        <div class="container">
+                            <fieldset class="form-group">
+                                <div class="row">
+                                    <div class="col-md-3 form-inline">
+                                        <Label class="spect" id="str">Bachillerato.</Label>
+                                        <div id="bachiller" class="custom-control custom-checkbox col-md">
+                                            <input name="BACH" value="SI" type="checkbox" class="custom-control-input" id="Bachillerato">
+                                            <label class="custom-control-label" for="Bachillerato"></label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-9 mb-0">
+                                        <div id="ingresos" class="custom-control custom-radio">
+                                            {{ render_field(form.entity_bachelor, class='form-control', placeholder='Nombre de la Entidad Certificadora...') }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <div class="row">
+                                    <div class="col-md-3 form-inline">
+                                        <Label class="spect mb-0" id="str">Técnico.</Label>
+                                        <div id="tecnico" class="custom-control custom-checkbox col-md">
+                                            <input name="TEC" value="SI" type="checkbox" class="custom-control-input" id="Técnico">
+                                            <label class="custom-control-label" for="Técnico"></label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-9 mb-0">
+                                        <div id="ingresos" class="custom-control custom-radio">
+                                            {{ render_field(form.title_technical, class='form-control', placeholder='Titulo Obtenido...') }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <div class="row">
+                                    <div class="col-md-3 form-inline">
+                                        <Label class="spect mb-0" id="str">Tecnológico.</Label>
+                                        <div id="tecnologo" class="custom-control custom-checkbox col-md">
+                                            <input name="TECNOL" value="SI" type="checkbox" class="custom-control-input" id="Tecnológico">
+                                            <label class="custom-control-label" for="Tecnológico"></label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-9 mb-0">
+                                        <div id="ingresos" class="custom-control custom-radio">
+                                            {{ render_field(form.title_technologist, class='form-control', placeholder='Titulo Obtenido...') }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <div class="row">
+                                    <div class="col-md-3 form-inline">
+                                        <Label class="spect mb-0" id="str">Universitario.</Label>
+                                        <div class="custom-control custom-checkbox col-md">
+                                            <input name="UNIV" value="SI" type="checkbox" class="custom-control-input" id="Universitario">
+                                            <label class="custom-control-label" for="Universitario"></label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-9 mb-0">
+                                        <div id="ingresos" class="custom-control custom-radio">
+                                            {{ render_field(form.title_academic, class='form-control', placeholder='Titulo Obtenido...') }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <div class="row">
+                                    <div class="col-md-3 form-inline">
+                                        <Label class="spect mb-0" id="str">Postgrado.</Label>
+                                        <div id="postgrado" class="custom-control custom-checkbox col-md">
+                                            <input name="POSTG" value="SI" type="checkbox" class="custom-control-input" id="Postgrado">
+                                            <label class="custom-control-label" for="Postgrado"></label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-9 mb-0">
+                                        <div id="ingresos" class="custom-control custom-radio">
+                                            {{ render_field(form.title_postgraduate, class='form-control', placeholder='Titulo Obtenido...') }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <div class="row">
+                                    <div class="col-md-3 form-inline">
+                                        <Label class="spect mb-0" id="str">Otros.</Label>
+                                        <div id="otros" class="custom-control custom-checkbox col-md">
+                                            <input name="OTRO" value="SI" type="checkbox" class="custom-control-input" id="customCheck1">
+                                            <label class="custom-control-label" for="customCheck1"></label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-9 mb-0">
+                                        <div id="ingresos" class="custom-control custom-radio">
+                                            {{ render_field(form.title_others, class='form-control', placeholder='Que Otro Titulo Obtenido...') }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <div class="form-group col-md-12 mt-4">
+                            <h1 id="subtitulos"><u>PERSONAS A CARGO</u></h1>
+                        </div>
+
+                        <div class="container">
+                            <table id="tables" class="table">
+                                <thead class="thead-light">
+                                <tr>
+                                    <th id="num" rowspan="2" scope="col">No.</th>
+                                    <th id="nombre" rowspan="2" scope="col">Nombres Y Apellidos Completos</th>
+                                    <th id="parent" rowspan="2" scope="col">Parentesco</th>
+                                    <th id="FecN" rowspan="2" scope="col">Fecha Nacimiento</th>
+                                    <th id="eda" rowspan="2" scope="col">Edad</th>
+                                    <th id="neduc" colspan="4" scope="col" style="text-align: center;">Nivel Educativo</th>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Pre-Escolar</th>
+                                    <th scope="col">Primaria</th>
+                                    <th scope="col">Segundaria</th>
+                                     <th scope="col">Universidad</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row" class="pt-4">1</th>
+                                    <td class="p-0">{{ render_field(form.dependents_name1, class='form-control', placeholder='Nombre Completo...') }}</td>
+                                    <td class="p-0">{{ render_field(form.dependents_relationship1, class='form-control', placeholder='Parentesco...') }}</td>
+                                    <td class="p-0">{{ render_field(form.dependents_birthdate1, class='form-control', type="date", placeholder='Fecha de Nacimiento...') }}</td>
+                                    <td class="p-0">{{ render_field(form.dependents_age1, type="number", class='form-control', placeholder='Edad...') }}</td>
+                                    <td class="pt-4">
+                                        <div class="form-check ml-4">
+                                            <input class="form-check-input" type="radio" name="NIVED1" id="exampleRadios1" value="Pre-Escolar">
+                                            <label class="form-check-label" for="exampleRadios1"></label>
+                                        </div>
+                                    </td>
+                                    <td class="pt-4">
+                                        <div class="form-check ml-4">
+                                            <input class="form-check-input" type="radio" name="NIVED1" id="exampleRadios1" value="Primaria">
+                                            <label class="form-check-label" for="exampleRadios1"></label>
+                                        </div>
+                                    </td>
+                                    <td class="pt-4">
+                                        <div class="form-check ml-4">
+                                            <input class="form-check-input" type="radio" name="NIVED1" id="exampleRadios1" value="Segundaria">
+                                            <label class="form-check-label" for="exampleRadios1"></label>
+                                        </div>
+                                    </td>
+                                    <td class="pt-4">
+                                        <div class="form-check ml-4">
+                                            <input class="form-check-input" type="radio" name="NIVED1" id="exampleRadios1" value="Universidad">
+                                            <label class="form-check-label" for="exampleRadios1"></label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="pt-4">2</th>
+                                    <td class="p-0">{{ render_field(form.dependents_name2, class='form-control', placeholder='Nombre Completo...') }}</td>
+                                    <td class="p-0">{{ render_field(form.dependents_relationship2, class='form-control', placeholder='Parentesco.') }}</td>
+                                    <td class="p-0">{{ render_field(form.dependents_birthdate2, type="date", class='form-control', placeholder='Fecha de Nacimiento') }}</td>
+                                    <td class="p-0">{{ render_field(form.dependents_age2, type="number", class='form-control', placeholder='Edad') }}</td>
+                                    <td class="pt-4">
+                                        <div class="form-check ml-4">
+                                            <input class="form-check-input" type="radio" name="NIVED2" id="exampleRadios1" value="Pre-Escolar">
+                                            <label class="form-check-label" for="exampleRadios1"></label>
+                                        </div>
+                                    </td>
+                                    <td class="pt-4">
+                                        <div class="form-check ml-4">
+                                            <input class="form-check-input" type="radio" name="NIVED2" id="exampleRadios1" value="Primaria">
+                                            <label class="form-check-label" for="exampleRadios1"></label>
+                                        </div>
+                                    </td>
+                                    <td class="pt-4">
+                                        <div class="form-check ml-4">
+                                            <input class="form-check-input" type="radio" name="NIVED2" id="exampleRadios1" value="Segundaria">
+                                            <label class="form-check-label" for="exampleRadios1"></label>
+                                        </div>
+                                    </td>
+                                    <td class="pt-4">
+                                        <div class="form-check ml-4">
+                                            <input class="form-check-input" type="radio" name="NIVED2" id="exampleRadios1" value="Universidad">
+                                            <label class="form-check-label" for="exampleRadios1"></label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="pt-4">3</th>
+                                    <td class="p-0">{{ render_field(form.dependents_name3, class='form-control', placeholder='Nombre Completo...') }}</td>
+                                    <td class="p-0">{{ render_field(form.dependents_relationship3, class='form-control', placeholder='Parentesco') }}</td>
+                                    <td class="p-0">{{ render_field(form.dependents_birthdate3, type="date", class='form-control', placeholder='Fecha de Nacimiento') }}</td>
+                                    <td class="p-0">{{ render_field(form.dependents_age3, type="number", class='form-control', placeholder='Edad') }}</td>
+                                    <td class="pt-4">
+                                        <div class="form-check ml-4">
+                                            <input class="form-check-input" type="radio" name="NIVED3" id="exampleRadios1" value="Pre-Escolar">
+                                            <label class="form-check-label" for="exampleRadios1"></label>
+                                        </div>
+                                    </td>
+                                    <td class="pt-4">
+                                        <div class="form-check ml-4">
+                                            <input class="form-check-input" type="radio" name="NIVED3" id="exampleRadios1" value="Primaria">
+                                            <label class="form-check-label" for="exampleRadios1"></label>
+                                        </div>
+                                    </td>
+                                    <td class="pt-4">
+                                        <div class="form-check ml-4">
+                                            <input class="form-check-input" type="radio" name="NIVED3" id="exampleRadios1" value="Segundaria">
+                                            <label class="form-check-label" for="exampleRadios1"></label>
+                                        </div>
+                                    </td>
+                                    <td class="pt-4">
+                                        <div class="form-check ml-4">
+                                            <input class="form-check-input" type="radio" name="NIVED3" id="exampleRadios1" value="Universidad">
+                                            <label class="form-check-label" for="exampleRadios1"></label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="container">
+                            <div class="form-check">
+                                <input class="form-check-input" name="JURAM" type="checkbox" value="SI" id="defaultCheck1" required>
+                                <label class="form-check-label" for="defaultCheck1">
+                                    Declaro bajo la gravedad de juramento que la información registrada en este documento es verídica y podrá ser corroborada en cualquier momento por el departamento de Seguridad de la compañía. Igualmente me comprometo a actualizar esta información en el momento en que se presente algún cambio.
+                                </label>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="form-check">
+                                <input class="form-check-input" name="FIRMA" type="checkbox" value="SI" id="defaultCheck2" required>
+                                <label class="form-check-label" for="defaultCheck2">
+                                    Al ingresar sus datos esta autorizando el registro y manejo de ellos por parte de VENTA EQUIPOS SAS, cualquier novedad puede consultar nuestra política de tratamiento de datos.
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-5" name="button" >
+                        Actualizar Datos
+                    </button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

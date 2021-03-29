@@ -1,0 +1,96 @@
+{% extends 'layout.html' %}
+{% from 'helpers/_forms.html' import render_field %}
+    {% block container %}
+        <!-- recibimos las varibles desde la vista por medio del form -->
+        <div class="container">
+            <div class="col-md-12 mt-5 mb-3" style="text-align: center;">
+                <h2>Editar Colaboradores</h2>
+            </div>
+            <form action="" method="post" enctype="multipart/form-data">
+                <div class="card row">
+                    <div class="col-md-12 mt-2" style="text-align: center;">
+                        <h4>Datos del Colaborador</h4>
+                    </div>
+                    <div class="col-md-12">
+                        <!-- Y lo utilizamos con un input oculto para el usuario -->
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ render_field(form.full_name, class='form-control col-form-label-sm', placeholder='Nombre Completo') }}
+                            </div>
+                            <div class="col-md-6">
+                                <label id="str">Tipo de Documento:</label>
+                                <select name="tpdoc" class="form-select form-control form-select-sm">
+                                    <option selected>{{ form.type_doc.data }}</option>
+                                    {% for i in tdoc %}
+                                    <option value="{{ i }}">{{ i }}</option>
+                                    {% endfor %}
+                                  </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md">
+                                {{ render_field(form.number_doc, class='form-control col-form-label-sm', placeholder='Numero de Documento') }}
+                            </div>
+                            <div class="col-md">
+                                {{ render_field(form.admission_date, type="date", class='form-control col-form-label-sm', placeholder='Fecha de Ingreso') }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md">
+                                <label id="str">Tipo de Contrato:</label>
+                                <select name="tpcon" class="form-select form-control form-select-sm">
+                                    <option selected>{{ form.type_contract.data }}</option>
+                                    {% for t in tcon %}
+                                    <option value="{{ t }}">{{ t }}</option>
+                                    {% endfor %}
+                                  </select>
+                            </div>
+                            <div class="col-md">
+                                <label id="str">Cargo:</label>
+                                <select name="cargo" class="form-select form-control form-select-sm">
+                                    <option selected>{{ form.cargo.data }}</option>
+                                    {% for c in cargo %}
+                                    <option value="{{ c }}">{{ c }}</option>
+                                    {% endfor %}
+                                  </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md">
+                                {{ render_field(form.salary, class='form-control col-form-label-sm', placeholder='Salario') }}
+                            </div>
+                            <div class="col-md">
+                                <label id="str">Area:</label>
+                                <select name="area" class="form-select form-control form-select-sm">
+                                    <option selected>{{ form.area.data }}</option>
+                                    {% for a in areas %}
+                                    <option value="{{ a }}">{{ a }}</option>
+                                    {% endfor %}
+                                  </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md">
+                                {{ render_field(form.email, class='form-control', placeholder='Correo Corporativo') }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="text-align: center;">
+                        <button type="submit" class="btn btn-primary mt-2 mb-2 ml-2 mr-2" name="button" >
+                            Guardar Cambios
+                        </button>
+                        <a href="javascript: history.go(-1)" class="btn btn-secondary mt-2 mb-2 ml-2 mr-2">Cancelar</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+{% endblock %}

@@ -1,0 +1,161 @@
+{% extends 'layout.html' %}
+{% from 'helpers/_forms.html' import render_field %}
+    {% block container %}
+        <div class="container">
+            <div class="container mt-3" style="text-align: center;">
+                <h1 id="listado_de_colaboradores">
+                    Listado de colaboradores
+                </h1>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Nombre Completo</th>
+                            <th scope="col">Tipo Documento</th>
+                            <th scope="col">Numero</th>
+                            <th scope="col">Area</th>
+                            <th scope="col">
+                                <a href="{{ url_for('.new_colaborador') }}" class="btn btn-info btn-sm">Nuevo Colaborador</a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for colab in colaborador.items %}
+                            <tr>
+                                <td>{{ colab.full_name }}</td>
+                                <td>{{ colab.type_doc }}</td>
+                                <td>{{ colab.number_doc }}</td>
+                                <td>{{ colab.area }}</td>
+                                <td>
+                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modver{{ colab.id }}">Ver</button>
+                                    <a href="{{ url_for('.edit_colaboradores', id_colab=colab.id) }}" class="btn btn-primary btn-sm">Editar</a>
+                                    <a href="{{ url_for('.delete_colaborador', id_colab=colab.id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Esta seguro que desea Eliminarlo?')">Eliminar</a>
+                                </td>
+                            </tr>
+                            <!-- creamos el modal dentro del for -->
+                            <div class="modal fade" tabindex="-1" id="modver{{ colab.id}}" role="dialog">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4>Vista Completa del Colaborador</h4>
+                                            <button class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="container">
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label id="str" class="control-label">Nombres Completo:</label>
+                                                                <input type="text" class="form-control" placeholder="{{ colab.full_name }}" disabled></input>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label id="str" for="message-text" class="control-label">Tipo de Documento:</label>
+                                                                <input type="text" class="form-control" placeholder="{{ colab.type_doc }}" disabled></input>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label id="str" for="recipient-name" class="control-label">Numero de Documento:</label>
+                                                                <input type="text" class="form-control" placeholder="{{ colab.number_doc }}" disabled></input>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label id="str" for="message-text" class="control-label">Fecha de Ingreso:</label>
+                                                                <input type="text" class="form-control" placeholder="{{ colab.admission_date }}" disabled></input>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label id="str" for="recipient-name" class="control-label">Tipo de Contrato:</label>
+                                                                <input type="text" class="form-control" placeholder="{{ colab.type_contract }}" disabled></input>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label id="str" for="message-text" class="control-label">Cargo:</label>
+                                                                <input type="text" class="form-control" placeholder="{{ colab.cargo }}" disabled></input>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label id="str" for="recipient-name" class="control-label">Salario:</label>
+                                                                <input type="text" class="form-control" placeholder="{{ colab.salary }}" disabled></input>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label id="str" for="message-text" class="control-label">Area Pertenece:</label>
+                                                                <input type="text" class="form-control" placeholder="{{ colab.area }}" disabled></input>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label id="str" for="recipient-name" class="control-label">Correo Corporativo:</label>
+                                                                <input type="text" class="form-control" placeholder="{{ colab.email }}" disabled></input>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- termina el modal para cerrar el for -->
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Nueva pestañas para realizar el proceso de paginación -->
+            <ul class="pagination justify-content-center">
+                {% if colaborador.has_prev %}
+                    <li class="page-item"><a class="page-link" href="{{ url_for('.lista_colaboradores', page_num=colaborador.prev_num) }}">Atras</a></li>
+                {% else %}
+                    <li class="page-item disabled"><span class="page-link">Fin</span>
+                {% endif %}
+                    </li>
+
+                {% for page in colaborador.iter_pages(left_edge=3, right_edge=3) %}
+                    {% if page %}
+                        {% if page == colaborador.page %}
+                        <li class="page-item disabled"><a class="page-link" href="{{ url_for('.lista_colaboradores', page_num=page) }}">{{ page }}</a></li>
+                        {% else %}
+                        <li class="page-item"><a class="page-link" href="{{ url_for('.lista_colaboradores', page_num=page) }}">{{ page }}</a></li>
+                        {% endif %}
+                    {% else %}
+                        <li class="page-item disabled" id="example_ellipsis"><a href="#" class="page-link">…</a></li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if colaborador.has_next %}
+                    <li class="page-item"><a class="page-link" href="{{ url_for('.lista_colaboradores', page_num=colaborador.next_num) }}">Siguiente</a></li>
+                {% else %}
+                    <li class="page-item disabled"><span class="page-link">Fin</span>
+                {% endif %}
+            </ul>
+
+        </div>
+
+    {% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+{% from 'helpers/_forms.html' import render_field %}
+    {% block container %}
+        <!-- recibimos las varibles desde la vista por medio del form -->
+        <div class="container">
+            <div class="col-md-12 mt-5">
+                <h2>Registro de Usuario</h2>
+                <form action="" method="post">
+
+                    <!-- Y lo utilizamos con un input oculto para el usuario -->
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
+                    <div class="form-grup">
+                        {{ render_field(form.username, class='form-control col-form-label-sm', placeholder='Nombre de Usuario') }}
+                    </div>
+                    <div class="from-grup">
+                        {{ render_field(form.email, class='form-control col-form-label-sm', placeholder='Correo Electronico') }}
+                    </div>
+                    <div class="from-grup">
+                        {{ render_field(form.password, class='form-control col-form-label-sm', placeholder='Contraseña o password') }}
+                    </div>
+                    <div class="from-grup">
+                        {{ render_field(form.confirm_password, class='form-control col-form-label-sm', placeholder='confirmar Contraseña o password') }}
+                    </div>
+                    <div class="form-check">
+                        {{ form.accept(class_='form-check-input') }}
+                        <label for="" class="form-check-bale">Acepto terminos y condiciones</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary" name="button" >
+                        Registrar
+                    </button>
+                </form>
+            </div>
+        </div>
+    {% endblock %}
